@@ -365,9 +365,6 @@ elif [[ ! -f $SETUP_FILE ]]; then
 elif ! is_root; then
   error 'this script does not have enough privileges to start.'
 
-elif ! is_connected; then
-  error 'this script needs to be connected to the Internet to continue.'
-
 else
   header
   $1
