@@ -62,13 +62,8 @@ header()
 build()
 {
   current_time=$(date +%S)
-  waiting_time=$((60 - ${current_time#0}))
 
   header
-  echo 'Waiting time:' $waiting_time 'seconds.'
-  echo 'Press Ctrl+C to abort.'
-  sleep $waiting_time
-  start_time=$(date +%s)
 
   echo
   echo 'Copying installation files...'
@@ -77,11 +72,11 @@ build()
 
   mkdir onion-ha-setup onion-ha-setup/bin onion-ha-setup/core
   mkdir onion-ha-setup/services onion-ha-setup/config
-  cp --no-preserve=all build/oniond.py onion-ha-setup/bin/oniond
-  cp --no-preserve=all build/core/*.py onion-ha-setup/core/
-  cp --no-preserve=all build/onion-ha.service onion-ha-setup/services/
-  cp --no-preserve=all build/oniond.conf onion-ha-setup/config/
-  cp --no-preserve=all build/LICENSE onion-ha-setup/
+  cp --no-preserve=all ../bin/oniond.py onion-ha-setup/bin/oniond
+  cp --no-preserve=all ../src/*.py onion-ha-setup/core/
+  cp --no-preserve=all ../services/onion-ha.service onion-ha-setup/services/
+  cp --no-preserve=all ../config/oniond.conf onion-ha-setup/config/
+  cp --no-preserve=all ../LICENSE onion-ha-setup/
   sleep 1
 
   echo 'Compressing installation files...'
