@@ -6,7 +6,7 @@ RUN \
       bash \
       curl \
       net-tools \
-      jq \
+      jq && \
   rm -rf /var/lib/apt/lists/*
       
 WORKDIR /app
