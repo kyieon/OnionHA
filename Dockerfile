@@ -1,5 +1,13 @@
 FROM python:3.10-alpine
 
+RUN \
+  apk update && \
+  apk add curl --no-cache && \
+  apk add bash --no-cache && \
+  apk add jq --no-cache && \
+  apk add net-tools --no-cache && \
+  rm -rf /var/cache/apk/*
+
 WORKDIR /app
 COPY . .
 
