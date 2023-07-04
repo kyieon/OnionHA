@@ -1,13 +1,14 @@
-FROM python:3.10-alpine
+FROM python:3.10
 
 RUN \
-  apk update && \
-  apk add curl --no-cache && \
-  apk add bash --no-cache && \
-  apk add jq --no-cache && \
-  apk add net-tools --no-cache && \
-  rm -rf /var/cache/apk/*
-
+  apt-get update && \
+  apt-get install -y \
+      bash \
+      curl \
+      net-tools \
+      jq \
+  rm -rf /var/lib/apt/lists/*
+      
 WORKDIR /app
 COPY . .
 
