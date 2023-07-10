@@ -5,7 +5,6 @@ RUN apt-get update && \
       bash \
       curl \
       net-tools \
-      netcat \
       jq \
       tzdata && \
       
