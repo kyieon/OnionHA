@@ -6,25 +6,22 @@ RUN \
       bash \
       curl \
       net-tools \
+      netcat \
       jq && \
   rm -rf /var/lib/apt/lists/*
       
 WORKDIR /app
 COPY . .
 
-RUN pwd
-RUN ls
-
 WORKDIR setup
-
-RUN pwd
-RUN ls
 
 RUN chmod +x build.sh
 RUN ./build.sh
 
 RUN chmod +x setup.sh
-RUN ./setup.sh install
+RUN echo "y" | ./setup.sh install
+
+WORKDIR /
 
 EXPOSE 7500
 
