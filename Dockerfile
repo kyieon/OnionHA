@@ -1,15 +1,16 @@
 FROM python:3.10
 
-RUN \
-  apt-get update && \
-  apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y \
       bash \
       curl \
       net-tools \
       netcat \
-      jq && \
-  rm -rf /var/lib/apt/lists/*
+      jq \
+      tzdata && \
       
+  rm -rf /var/lib/apt/lists/*
+    
 WORKDIR /app
 COPY . .
 
