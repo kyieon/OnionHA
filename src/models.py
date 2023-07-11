@@ -26,6 +26,7 @@
 
 from time import time
 from socket import getfqdn
+from .logs import Logger
 from .exceptions import UnknownNodeError
 
 
@@ -97,7 +98,11 @@ class Cluster:
 
         '''
         nodes = self.nodes_alive
-
+        Logger.get().info(f'get_next_active_node : nodes : {nodes}')
+        
+        for node in nodes:
+            Logger.get().info(f'get_next_active_node : node : {node} {node.deadtime()} {node.last_seen()}')
+            
         if nodes:
             return nodes[0]
 
@@ -215,13 +220,27 @@ class Device:
         return self._address
 
     @property
+    def deadtime(self):
+        '''
+        
+        '''
+        return self._deadtime
+
+    @property
+    def last_seen(self):
+        '''
+        
+        '''
+        return self._last_seen
+        
+    @property
     def is_alive(self):
         '''
         Indicates whether the node is alive. Returns a `boolean`.
 
         '''
         return time() - self._last_seen < self._deadtime
-
+        
 
 class Gateway(Device):
     '''
