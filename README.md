@@ -43,7 +43,7 @@ In this section, you will find how to install Onion HA on your nodes. An Onion H
 
 Before continuing, make sure your nodes meet the following prerequisites:
 
-- Python 3.6 or higher is installed.
+- Python 3.7 or higher is installed.
 - The Python Package Installer (pip3) is installed.
 - Debian, Ubuntu, Red Hat and CentOS are officially supported but you can use another distribution.
 
