@@ -27,8 +27,8 @@
 from os import getpid, geteuid
 from pathlib import PosixPath
 from re import findall, sub
-from subprocess import run, SubprocessError, DEVNULL, STDOUT
-
+from subprocess import run, SubprocessError
+from .logs import Logger
 
 _PID = getpid()
 _PID_FILE = PosixPath('/var/run/oniond.pid')
@@ -55,7 +55,12 @@ def run_command(command):
 
     '''
     try:
-        run(command, stdout=DEVNULL, stderr=STDOUT, check=True)
+        result = run(command, capture_output=True, text=True, check=True)
+
+        Logger.get().info(f'exit status: {result.returncode}')
+        Logger.get().info(f'stdout: {result.stdout}')
+        Logger.get().error(f'stderr: {result.stderr}')
+        
         return True
 
     except (OSError, SubprocessError):
