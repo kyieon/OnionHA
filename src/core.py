@@ -190,26 +190,32 @@ class OnionServer:
 
         while self._is_running:
             node = cluster.get_next_active_node()
-
+            logger.info(f'get_next_active_node : {node}')
+            
             # We execute the actions on this node
             if node is cluster.current_node:
                 if not cluster.current_node.is_active:
+                    logger.info(f'_active_mode : {cluster.current_node}')
                     self._active_mode(cluster.current_node)
 
             else:
                 if cluster.current_node.is_active:
+                    logger.info(f'_passive_mode : {cluster.current_node}')
                     self._passive_mode(cluster.current_node)
 
             # We update the status of the nodes
             if node:
                 if node is not cluster.active_node:
+                    logger.info(f'cluster.activate : {node}')
                     cluster.activate(node)
 
             else:
                 if cluster.active_node:
+                    logger.info(f'cluster.reset_active_node')
                     cluster.reset_active_node()
 
-            sleep(0.5)
+            #sleep(0.5)
+            sleep(5)
 
         logger.info('Stopping Onion HA...')
         sleep(1)
