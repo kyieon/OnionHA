@@ -1,3 +1,4 @@
+# Debian GNU/Linux 12 (bookworm)
 FROM python:3.10
 
 RUN apt-get update && \
@@ -5,6 +6,7 @@ RUN apt-get update && \
       bash \
       curl \
       net-tools \
+      netcat-openbsd \
       jq \
       tzdata && \
       
