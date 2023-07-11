@@ -57,13 +57,14 @@ def run_command(command):
     try:
         result = run(command, capture_output=True, text=True, check=True)
 
-        Logger.get().info(f'exit status: {result.returncode}')
         Logger.get().info(f'stdout: {result.stdout}')
-        Logger.get().error(f'stderr: {result.stderr}')
-        
+        if result.stderr:
+            Logger.get().error(f'stderr: {result.stderr}')
+
         return True
 
-    except (OSError, SubprocessError):
+    except (OSError, SubprocessError) as err:
+        Logger.get().error(str(err))
         return False
 
 
