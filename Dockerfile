@@ -1,5 +1,4 @@
 # Debian GNU/Linux 12 (bookworm)
-#FROM python:3.10
 FROM python:3.10-slim
 
 RUN apt-get update && \
