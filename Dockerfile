@@ -8,6 +8,7 @@ RUN apt-get update && \
       net-tools \
       netcat-openbsd \
       jq \
+      docker.io \
       tzdata && \
       
   rm -rf /var/lib/apt/lists/*
