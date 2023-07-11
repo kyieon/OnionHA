@@ -55,11 +55,13 @@ def run_command(command):
 
     '''
     try:
+        Logger.get().info(f'command: {command}')
+        
         result = run(command, capture_output=True, text=True, check=True)
 
-        Logger.get().info(f'stdout: {result.stdout}')
+        Logger.get().info(f'{result.stdout}')
         if result.stderr:
-            Logger.get().error(f'stderr: {result.stderr}')
+            Logger.get().error(f'{result.stderr}')
 
         return True
 
