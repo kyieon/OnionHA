@@ -25,6 +25,6 @@ RUN echo "y" | ./setup.sh install
 
 WORKDIR /
 
-EXPOSE 7500
+EXPOSE 7500/udp
 
 CMD ["oniond", "start"]
