@@ -10,7 +10,6 @@ RUN apt-get update && \
       jq \
       docker.io \
       tzdata && \
-      
   rm -rf /var/lib/apt/lists/*
     
 WORKDIR /app
