@@ -190,7 +190,7 @@ class OnionServer:
 
         while self._is_running:
             node = cluster.get_next_active_node()
-            logger.info(f'get_next_active_node : {node}')
+            logger.debug(f'get_next_active_node : {node}')
             
             # We execute the actions on this node
             if node is cluster.current_node:
@@ -214,8 +214,7 @@ class OnionServer:
                     logger.info(f'cluster.reset_active_node')
                     cluster.reset_active_node()
 
-            #sleep(0.5)
-            sleep(5)
+            sleep(1)
 
         logger.info('Stopping Onion HA...')
         sleep(1)
