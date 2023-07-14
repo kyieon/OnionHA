@@ -103,8 +103,7 @@ class Cluster:
         Logger.get().info(f'get_next_active_node : active_node : {self._active_node}')
             
         for node in nodes:
-            Logger.get().info(f'get_next_active_node : {node} : str({node.deadtime()})')
-            Logger.get().info(f'get_next_active_node : {node} : str({node.last_seen()})')
+            Logger.get().info(f'get_next_active_node : {node}')
             
             if node is self._active_node:
                 Logger.get().info(f'get_next_active_node : Match Active Node')
