@@ -98,10 +98,9 @@ class Cluster:
 
         '''
         nodes = self.nodes_alive
+        Logger.get().info('get_next_active_node : nodes : ' + str(len(nodes)))
         
-        Logger.get().info(f'get_next_active_node : nodes : {nodes}')
         Logger.get().info(f'get_next_active_node : active_node : {self._active_node}')
-            
         for node in nodes:
             Logger.get().info(f'get_next_active_node : {node}')
             
@@ -246,6 +245,12 @@ class Device:
         Indicates whether the node is alive. Returns a `boolean`.
 
         '''
+        
+        Logger.get().info(f'is_alive : IP : {self._address}')
+        Logger.get().info(f'is_alive : time : ' + str(time()))
+        Logger.get().info(f'is_alive : last_seen : ' + str(self._last_seen))
+        Logger.get().info(f'is_alive : deadtime  : ' + str(self._deadtime))
+        
         return time() - self._last_seen < self._deadtime
         
 
