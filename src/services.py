@@ -162,8 +162,6 @@ class HeartbeatService(Service):
                 if node.is_current_node:
                     continue
 
-                Logger.get().info(f'HeartbeatService : send : {node.address}')
-
                 socket.send(
                     payload=b'HELLO',
                     address=node.address,
@@ -228,11 +226,8 @@ class ListenerService(Service):
     def _repeat(self, cluster, gateway, socket):
         try:
             payload, address, port = socket.receive()
-            Logger.get().info(f'ListenerService : receive : {address} , {payload}')
-
             node = cluster.get(address)
-            Logger.get().info(f'ListenerService : cluster : get : {node}')
-
+            
             if payload == b'HELLO':
                 node.mark_as_alive()
 
