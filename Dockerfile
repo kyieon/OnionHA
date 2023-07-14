@@ -3,11 +3,6 @@ FROM python:3.10-slim
 
 RUN apt-get update && \
     apt-get install -y \
-      bash \
-      curl \
-      net-tools \
-      netcat-openbsd \
-      jq \
       docker.io \
       tzdata && \
   rm -rf /var/lib/apt/lists/*
