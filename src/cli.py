@@ -173,6 +173,7 @@ def start(options):
         )
 
         logger.level = {
+            'debug': Logger.DEBUG,
             'info': Logger.INFO,
             'warning': Logger.WARN,
             'error': Logger.ERROR
