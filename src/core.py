@@ -184,7 +184,7 @@ class OnionServer:
             service.start()
 
         logger.info('Collecting information from remote nodes...')
-        sleep(2)
+        sleep(1)
 
         logger.info('Onion HA is started')
 

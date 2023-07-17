@@ -237,9 +237,11 @@ class ListenerService(Service):
 
     def _repeat(self, cluster, gateway, socket):
         try:
+            Logger.get().info(f'ListenerService : cluster : {cluster}')
             payload, address, port = socket.receive()
+            Logger.get().info(f'ListenerService : receive : {address} {payload}')
             node = cluster.get(address)
-            Logger.get().info(f'ListenerService : receive : {address}({node}) {payload}')
+            Logger.get().info(f'ListenerService : receive node : {node}')
 
             if payload == b'HELLO':
                 node.mark_as_alive()
@@ -247,6 +249,7 @@ class ListenerService(Service):
             elif (payload == b'GET STATUS' and
                   node.is_current_node):
                 dump = dump_cluster(cluster)
+                Logger.get().info(f'ListenerService : GET STATUS : send : {dump.encode()}')
 
                 socket.send(
                     payload=dump.encode(),
