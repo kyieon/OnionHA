@@ -46,6 +46,9 @@ class Cluster:
         self._current_node = None
         self._active_node = None
 
+    def __str__(self):
+        return f'Cluster Nodes : {self._nodes}'
+
     def register(self, node):
         '''
         Registers a node in the cluster.
@@ -187,7 +190,7 @@ class Device:
         self._last_seen = 0
 
     def __str__(self):
-        return f'{self.__class__.__name__} {self._address}'
+        return f'Device {self._address}'
 
     def __lt__(self, other):
         return self.id < other.id
@@ -288,6 +291,9 @@ class Node(Device):
         self._port = port
         self._is_current_node = is_current_node
         self._is_active = False
+
+    def __str__(self):
+        return f'Node {self._address}'
 
     @property
     def port(self):

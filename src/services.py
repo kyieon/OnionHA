@@ -54,6 +54,7 @@ class Service(Thread):
         of the cluster.
 
     '''
+
     def __init__(self, cluster, gateway, socket):
         super().__init__()
         self._cluster = cluster
@@ -154,9 +155,9 @@ class HeartbeatService(Service):
         of the cluster.
 
     '''
+
     def _repeat(self, cluster, gateway, socket):
         nodes = cluster.nodes
-        Logger.get().info(f'HeartbeatService : nodes : {nodes}')
 
         try:
             for node in nodes:
@@ -193,20 +194,25 @@ class ConnectivityService(Service):
         of the cluster.
 
     '''
+
     def _repeat(self, cluster, gateway, socket):
         current_node = cluster.current_node
 
-        host = ping(
-            address=gateway.address,
-            count=1,
-            timeout=1)
+        try:
+            host = ping(
+                address=gateway.address,
+                count=1,
+                timeout=1)
 
-        Logger.get().info(f'ConnectivityService : ping gateway : {gateway.address} {host.is_alive}')
+            Logger.get().info(f'ConnectivityService : ping gateway : {gateway.address} {host.is_alive}')
 
-        if host.is_alive:
-            gateway.mark_as_alive()
-            current_node.mark_as_alive()
-            sleep(0.5)
+            if host.is_alive:
+                gateway.mark_as_alive()
+                current_node.mark_as_alive()
+        except (Exception,):
+            pass
+
+        sleep(0.5)
 
 
 class ListenerService(Service):
@@ -228,15 +234,12 @@ class ListenerService(Service):
         of the cluster.
 
     '''
+
     def _repeat(self, cluster, gateway, socket):
         try:
-            Logger.get().info(f'ListenerService : cluster : {cluster}')
-
             payload, address, port = socket.receive()
-            Logger.get().info(f'ListenerService : receive : {address} {payload}')
-
             node = cluster.get(address)
-            Logger.get().info(f'ListenerService : node : {node}')
+            Logger.get().info(f'ListenerService : receive : {address}({node}) {payload}')
 
             if payload == b'HELLO':
                 node.mark_as_alive()
@@ -278,6 +281,7 @@ class SupervisorService(Service):
         of the cluster.
 
     '''
+
     def _before(self, cluster, gateway, socket):
         self._devices = [
             node
