@@ -242,9 +242,9 @@ class ListenerService(Service):
                     port=port)
 
         except UnknownNodeError as err:
-            Logger.get().warn(
+            Logger.get().debug(
                 f'Possible port scan attack: request received '
-                f'from an unauthorized host ({err.address})')
+                f'from an unauthorized host ({err.address}) ({err.message})')
 
         except TimeoutExceeded:
             pass
