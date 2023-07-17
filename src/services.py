@@ -231,9 +231,8 @@ class ListenerService(Service):
             if payload == b'HELLO':
                 node.mark_as_alive()
 
-            # elif (payload == b'GET STATUS' and
-            #       node.is_current_node):
-            elif (payload == b'GET STATUS'):
+            elif (payload == b'GET STATUS' and
+                  node.is_current_node):
                 dump = dump_cluster(cluster)
 
                 socket.send(
