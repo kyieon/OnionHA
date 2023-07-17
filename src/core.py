@@ -214,7 +214,7 @@ class OnionServer:
                     logger.info(f'cluster.reset_active_node')
                     cluster.reset_active_node()
 
-            sleep(1)
+            sleep(0.5)
 
         logger.info('Stopping Onion HA...')
         sleep(1)
