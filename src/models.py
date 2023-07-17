@@ -98,7 +98,8 @@ class Cluster:
 
         '''
         nodes = self.nodes_alive
-        
+        Logger.get().info(f'get_next_active_node : nodes_alive : ' + str(len(nodes)))
+
         if nodes:
             return nodes[0]
 

@@ -190,7 +190,7 @@ class OnionServer:
 
         while self._is_running:
             node = cluster.get_next_active_node()
-            logger.debug(f'get_next_active_node : {node}')
+            logger.info(f'get_next_active_node : {node}')
             
             # We execute the actions on this node
             if node is cluster.current_node:
