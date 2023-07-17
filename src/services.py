@@ -164,7 +164,7 @@ class HeartbeatService(Service):
                 if node.is_current_node:
                     continue
 
-                Logger.get().info(f'HeartbeatService : send : {node.address} ' + str(node.port))
+                Logger.get().debug(f'HeartbeatService : send : {node.address} ' + str(node.port))
 
                 socket.send(
                     payload=b'HELLO',
@@ -204,7 +204,7 @@ class ConnectivityService(Service):
                 count=1,
                 timeout=1)
 
-            Logger.get().info(f'ConnectivityService : ping gateway : {gateway.address} {host.is_alive}')
+            Logger.get().debug(f'ConnectivityService : ping gateway : {gateway.address} {host.is_alive}')
 
             if host.is_alive:
                 gateway.mark_as_alive()
@@ -237,11 +237,9 @@ class ListenerService(Service):
 
     def _repeat(self, cluster, gateway, socket):
         try:
-            Logger.get().info(f'ListenerService : cluster : {cluster}')
             payload, address, port = socket.receive()
-            Logger.get().info(f'ListenerService : receive : {address} {payload}')
+            Logger.get().debug(f'ListenerService : receive : {address} {payload}')
             node = cluster.get(address)
-            Logger.get().info(f'ListenerService : receive node : {node}')
 
             if payload == b'HELLO':
                 node.mark_as_alive()
@@ -249,7 +247,8 @@ class ListenerService(Service):
             elif (payload == b'GET STATUS' and
                   node.is_current_node):
                 dump = dump_cluster(cluster)
-                Logger.get().info(f'ListenerService : GET STATUS : send : {dump.encode()}')
+
+                Logger.get().debug(f'ListenerService : GET STATUS : send : {dump.encode()}')
 
                 socket.send(
                     payload=dump.encode(),

@@ -168,6 +168,7 @@ class OnionServer:
                 socket=socket),
         ]
 
+        logger.info('Init Delay ... ' + str(self._init_delay) + ' sec')
         sleep(self._init_delay)
 
         try:
@@ -184,13 +185,13 @@ class OnionServer:
             service.start()
 
         logger.info('Collecting information from remote nodes...')
-        sleep(1)
+        sleep(5)
 
         logger.info('Onion HA is started')
 
         while self._is_running:
             node = cluster.get_next_active_node()
-            logger.info(f'get_next_active_node : {node}')
+            logger.debug(f'get_next_active_node : {node}')
             
             # We execute the actions on this node
             if node is cluster.current_node:

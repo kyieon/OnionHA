@@ -57,7 +57,7 @@ _OPTIONS = [
     OptionSpec(
         section='logging',
         option='level',
-        allowed=('info', 'warning', 'error'),
+        allowed=('debug', 'info', 'warning', 'error'),
         default='info'
     ),
 
