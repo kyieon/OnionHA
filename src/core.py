@@ -127,9 +127,6 @@ class OnionServer:
         self._is_running = True
         logger = Logger.get()
 
-        logger.info(f'Onion HA {__version__} (build {__build__}) '
-                    f'released on {__date__}')
-
         logger.info('Starting Onion HA...')
 
         socket = UDPSocket()
