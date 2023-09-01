@@ -9,6 +9,7 @@ RUN apt-get update && \
       netcat-openbsd \
       jq \
       docker.io \
+      docker-compose \
       tzdata && \
   rm -rf /var/lib/apt/lists/*
     

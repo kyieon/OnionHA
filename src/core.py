@@ -124,11 +124,9 @@ class OnionServer:
         `stop` method is called.
 
         '''
+        self._is_Init = True
         self._is_running = True
         logger = Logger.get()
-
-        logger.info(f'Onion HA {__version__} (build {__build__}) '
-                    f'released on {__date__}')
 
         logger.info('Starting Onion HA...')
 
@@ -200,7 +198,7 @@ class OnionServer:
                     self._active_mode(cluster.current_node)
 
             else:
-                if cluster.current_node.is_active:
+                if self._is_Init or cluster.current_node.is_active:
                     logger.info(f'_passive_mode : {cluster.current_node}')
                     self._passive_mode(cluster.current_node)
 
@@ -215,6 +213,7 @@ class OnionServer:
                     logger.info(f'cluster.reset_active_node')
                     cluster.reset_active_node()
 
+            self._is_Init = False
             sleep(0.5)
 
         logger.info('Stopping Onion HA...')
