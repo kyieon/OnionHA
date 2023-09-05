@@ -29,6 +29,6 @@ __author__    = 'Valentin BELYN'
 __copyright__ = 'Copyright 2017-2020 Valentin BELYN'
 __license__   = 'GNU General Public License v3.0'
 
-__version__   = '2.0.2'
-__date__      = '2020-09-02'
+__version__   = '3.0.0'
+__date__      = '2023-09-05'
 __build__     = '600'
